@@ -1,4 +1,4 @@
-package com.example.jetpackdemo
+package com.example.jetpackdemo.Bean
 
 import com.google.gson.annotations.SerializedName
 
@@ -8,5 +8,7 @@ data class ContentBean(
     @SerializedName("title")
     var title : String,
     @SerializedName("desc")
-    var des : String
+    var des : String,
+    @SerializedName("owner")
+    var owner : Owner
 )

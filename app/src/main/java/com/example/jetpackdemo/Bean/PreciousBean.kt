@@ -1,5 +1,6 @@
-package com.example.jetpackdemo
+package com.example.jetpackdemo.Bean
 
+import com.example.jetpackdemo.Bean.DataBean
 import com.google.gson.annotations.SerializedName
 
 data class PreciousBean(

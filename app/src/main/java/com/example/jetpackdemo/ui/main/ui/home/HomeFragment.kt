@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.jetpackdemo.MainActivity
 import com.example.jetpackdemo.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
@@ -33,10 +32,6 @@ class HomeFragment : Fragment() {
         val textView: TextView = binding.textHome
         homeViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
-        }
-        binding.textHome.setOnClickListener {
-            val intent = Intent(activity,MainActivity::class.java)
-            startActivity(intent)
         }
         return root
     }
