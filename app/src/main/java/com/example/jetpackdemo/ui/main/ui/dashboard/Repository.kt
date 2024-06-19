@@ -6,4 +6,6 @@ import okhttp3.Response
 
 class Repository(private val apiHelper: ApiHelper) {
     suspend fun getPrecious() = apiHelper.getPrecious()
+
+    suspend fun getDetailContent() = apiHelper.getDetailContent()
 }

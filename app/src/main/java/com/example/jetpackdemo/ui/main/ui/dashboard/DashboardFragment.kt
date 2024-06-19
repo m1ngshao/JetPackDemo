@@ -36,7 +36,7 @@ class DashboardFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        viewModel = ViewModelProvider(this,ViewModelFactory(ApiHelper(RetrofitBuilder.apiService)))
+        viewModel = ViewModelProvider(this,ViewModelFactory(ApiHelper(RetrofitBuilder.apiService,null)))
             .get(DashboardViewModel::class.java)
 
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
@@ -62,9 +62,9 @@ class DashboardFragment : Fragment() {
             }
         })
         madapter.setListener {
-            val des = it.des
+            val aid = it.aid
             val bundle = bundleOf(
-                Pair("message",des)
+                Pair("message",aid)
             )
             val fragmentManager = activity?.supportFragmentManager
             val listItemDetailFragment = ListItemDetailFragment.newInstance()

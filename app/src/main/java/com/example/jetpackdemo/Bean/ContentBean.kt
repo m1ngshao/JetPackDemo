@@ -3,6 +3,8 @@ package com.example.jetpackdemo.Bean
 import com.google.gson.annotations.SerializedName
 
 data class ContentBean(
+    @SerializedName("aid")
+    var aid :Long,
     @SerializedName("pic")
     var pic : String,
     @SerializedName("title")
