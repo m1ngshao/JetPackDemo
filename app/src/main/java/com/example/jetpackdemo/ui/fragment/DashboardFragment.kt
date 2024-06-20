@@ -12,16 +12,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView.GONE
 import androidx.recyclerview.widget.RecyclerView.VISIBLE
-import com.example.jetpackdemo.Bean.ContentBean
+import com.example.jetpackdemo.bean.ContentBean
 import com.example.jetpackdemo.R
-import com.example.jetpackdemo.api.ApiHelper
-import com.example.jetpackdemo.api.RetrofitBuilder
 import com.example.jetpackdemo.api.Status
 import com.example.jetpackdemo.databinding.FragmentDashboardBinding
-import com.example.jetpackdemo.ui.main.ListItemDetailFragment
 import com.example.jetpackdemo.adapter.DashboardListAdapter
 import com.example.jetpackdemo.viewmodel.DashboardViewModel
-import com.example.jetpackdemo.viewmodel.ViewModelFactory
 
 class DashboardFragment : Fragment() {
 
@@ -39,7 +35,7 @@ class DashboardFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        viewModel = ViewModelProvider(this, ViewModelFactory(ApiHelper(RetrofitBuilder.apiService,null)))
+        viewModel = ViewModelProvider(this)
             .get(DashboardViewModel::class.java)
 
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)

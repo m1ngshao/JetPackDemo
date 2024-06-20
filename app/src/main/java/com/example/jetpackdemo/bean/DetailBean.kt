@@ -1,4 +1,4 @@
-package com.example.jetpackdemo.Bean
+package com.example.jetpackdemo.bean
 
 import com.google.gson.annotations.SerializedName
 

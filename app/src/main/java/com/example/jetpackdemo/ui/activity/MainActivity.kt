@@ -1,6 +1,8 @@
-package com.example.jetpackdemo.ui.main
+package com.example.jetpackdemo.ui.activity
 
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.View.GONE
 import android.view.View.VISIBLE
@@ -11,17 +13,23 @@ import com.example.jetpackdemo.R
 import com.example.jetpackdemo.databinding.ActivityMainBinding
 import com.example.jetpackdemo.ui.fragment.DashboardFragment
 import com.example.jetpackdemo.ui.fragment.HomeFragment
+import com.example.jetpackdemo.ui.fragment.ListItemDetailFragment
 import com.example.jetpackdemo.ui.fragment.NotificationsFragment
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
+    companion object{
+        var deepLinkAid: Long? = null
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        val uri = intent.data
+        deepLinkAid = uri?.getQueryParameter("aid")?.toLong()
         supportFragmentManager.beginTransaction().replace(R.id.main_fragment_container, HomeFragment())
             .addToBackStack(null).commit()
 
@@ -41,6 +49,11 @@ class MainActivity : AppCompatActivity() {
                 }
             }
             return@setOnItemSelectedListener true
+        }
+        if(deepLinkAid != null) {
+            supportFragmentManager.beginTransaction().replace(R.id.main_fragment_container, ListItemDetailFragment())
+                .addToBackStack(null).commit()
+            hideBottomNavigation()
         }
     }
 

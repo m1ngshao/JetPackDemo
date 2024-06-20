@@ -60,6 +60,7 @@ dependencies {
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.1")
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1")
     implementation ("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.9.10")
+    implementation("io.reactivex.rxjava3:rxjava:3.1.8")
 
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")

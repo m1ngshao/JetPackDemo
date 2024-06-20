@@ -1,4 +1,4 @@
-package com.example.jetpackdemo.ui.main
+package com.example.jetpackdemo.ui.fragment
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,13 +8,11 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.example.jetpackdemo.Bean.DetailContentBean
+import com.example.jetpackdemo.bean.DetailContentBean
 import com.example.jetpackdemo.databinding.FragmentListItemDetailBinding
-import com.example.jetpackdemo.api.ApiHelper
-import com.example.jetpackdemo.api.RetrofitBuilder
 import com.example.jetpackdemo.api.Status
+import com.example.jetpackdemo.ui.activity.MainActivity
 import com.example.jetpackdemo.viewmodel.ListItemDetailViewModel
-import com.example.jetpackdemo.viewmodel.ViewModelFactory
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -32,7 +30,7 @@ class ListItemDetailFragment : Fragment() {
 
 
     companion object{
-        fun newInstance(): ListItemDetailFragment{
+        fun newInstance(): ListItemDetailFragment {
             val args = Bundle()
             val fragment = ListItemDetailFragment()
             fragment.arguments = args
@@ -49,13 +47,14 @@ class ListItemDetailFragment : Fragment() {
 
         val clickAid = arguments?.getLong("message")
         if (clickAid != null) (activity as MainActivity).hideBottomNavigation()
-        viewModel = ViewModelProvider(this, ViewModelFactory(ApiHelper(RetrofitBuilder.apiService, clickAid ?: DetailActivity.deepLinkAid)))
+        viewModel = ViewModelProvider(this)
             .get(ListItemDetailViewModel::class.java)
-
+        viewModel.aid = (clickAid ?: MainActivity.deepLinkAid)!!
         _binding = FragmentListItemDetailBinding.inflate(inflater, container, false)
         binding.detailToolbarBack.setOnClickListener {
             (activity as MainActivity).supportFragmentManager.popBackStack()
             (activity as MainActivity).showBottomNavigation()
+            MainActivity.deepLinkAid = null
         }
         viewModel.getDetailContent().observe(viewLifecycleOwner, Observer { 
             it.let {resource -> 
@@ -65,7 +64,6 @@ class ListItemDetailFragment : Fragment() {
                     }
                     Status.SUCCESS ->{
                         resource.data.let { detailbean -> binding.detailTv.text = getDetailDesc(detailbean?.data) }
-
                     }
                     Status.ERROR ->{
                         Toast.makeText(context,resource.message, Toast.LENGTH_SHORT).show()
