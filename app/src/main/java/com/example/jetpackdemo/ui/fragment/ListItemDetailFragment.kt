@@ -10,10 +10,11 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.jetpackdemo.Bean.DetailContentBean
 import com.example.jetpackdemo.databinding.FragmentListItemDetailBinding
-import com.example.jetpackdemo.ui.main.ui.dashboard.ApiHelper
-import com.example.jetpackdemo.ui.main.ui.dashboard.RetrofitBuilder
-import com.example.jetpackdemo.ui.main.ui.dashboard.Status
-import com.example.jetpackdemo.ui.main.ui.dashboard.ViewModelFactory
+import com.example.jetpackdemo.api.ApiHelper
+import com.example.jetpackdemo.api.RetrofitBuilder
+import com.example.jetpackdemo.api.Status
+import com.example.jetpackdemo.viewmodel.ListItemDetailViewModel
+import com.example.jetpackdemo.viewmodel.ViewModelFactory
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -48,7 +49,7 @@ class ListItemDetailFragment : Fragment() {
 
         val clickAid = arguments?.getLong("message")
         if (clickAid != null) (activity as MainActivity).hideBottomNavigation()
-        viewModel = ViewModelProvider(this,ViewModelFactory(ApiHelper(RetrofitBuilder.apiService, clickAid ?: DetailActivity.deepLinkAid)))
+        viewModel = ViewModelProvider(this, ViewModelFactory(ApiHelper(RetrofitBuilder.apiService, clickAid ?: DetailActivity.deepLinkAid)))
             .get(ListItemDetailViewModel::class.java)
 
         _binding = FragmentListItemDetailBinding.inflate(inflater, container, false)

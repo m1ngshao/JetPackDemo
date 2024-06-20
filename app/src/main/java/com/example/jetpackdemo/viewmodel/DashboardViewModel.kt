@@ -1,9 +1,9 @@
-package com.example.jetpackdemo.ui.main.ui.dashboard
+package com.example.jetpackdemo.viewmodel
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
+import com.example.jetpackdemo.api.Repository
+import com.example.jetpackdemo.api.Resource
 import kotlinx.coroutines.Dispatchers
 
 class DashboardViewModel(private val repository: Repository) : ViewModel() {

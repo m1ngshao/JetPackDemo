@@ -1,8 +1,9 @@
-package com.example.jetpackdemo.ui.main.ui.dashboard
+package com.example.jetpackdemo.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.jetpackdemo.ui.main.ListItemDetailViewModel
+import com.example.jetpackdemo.api.ApiHelper
+import com.example.jetpackdemo.api.Repository
 import java.lang.IllegalArgumentException
 
 class ViewModelFactory(private val apiHelper: ApiHelper) : ViewModelProvider.Factory {

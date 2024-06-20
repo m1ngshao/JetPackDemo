@@ -1,8 +1,8 @@
-package com.example.jetpackdemo.ui.main.ui.dashboard
+package com.example.jetpackdemo.api
 
-data class Resource<out T>(val status: Status,val data : T?,val message : String?) {
+data class Resource<out T>(val status: Status, val data : T?, val message : String?) {
     companion object{
-        fun <T> loading (data : T?) : Resource<T>  = Resource(status = Status.LOADING,data = data,message = null)
+        fun <T> loading (data : T?) : Resource<T> = Resource(status = Status.LOADING,data = data,message = null)
 
         fun <T> success(data : T?) : Resource<T> = Resource(status = Status.SUCCESS,data = data,message = null)
 

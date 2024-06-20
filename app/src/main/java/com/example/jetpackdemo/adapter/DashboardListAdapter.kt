@@ -1,10 +1,9 @@
-package com.example.jetpackdemo.ui.main
+package com.example.jetpackdemo.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.jetpackdemo.Bean.ContentBean
@@ -12,7 +11,7 @@ import com.example.jetpackdemo.R
 
 
 
-class MyAdapter(private val contentBeanList: ArrayList<ContentBean>) : RecyclerView.Adapter<MyAdapter.MyViewHolder>() {
+class DashboardListAdapter(private val contentBeanList: ArrayList<ContentBean>) : RecyclerView.Adapter<DashboardListAdapter.MyViewHolder>() {
     private var listener : ((contentBean: ContentBean) ->Unit?)? = null
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

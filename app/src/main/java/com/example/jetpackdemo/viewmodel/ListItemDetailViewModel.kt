@@ -1,9 +1,9 @@
-package com.example.jetpackdemo.ui.main
+package com.example.jetpackdemo.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
-import com.example.jetpackdemo.ui.main.ui.dashboard.Repository
-import com.example.jetpackdemo.ui.main.ui.dashboard.Resource
+import com.example.jetpackdemo.api.Repository
+import com.example.jetpackdemo.api.Resource
 import kotlinx.coroutines.Dispatchers
 
 class ListItemDetailViewModel(private val repository: Repository) : ViewModel() {

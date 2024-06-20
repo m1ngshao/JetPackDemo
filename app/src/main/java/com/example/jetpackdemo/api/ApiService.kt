@@ -1,4 +1,4 @@
-package com.example.jetpackdemo.ui.main
+package com.example.jetpackdemo.api
 
 import com.example.jetpackdemo.Bean.DetailBean
 import com.example.jetpackdemo.Bean.PreciousBean
@@ -13,4 +13,5 @@ interface ApiService {
 
     @GET("/x/web-interface/view")
     suspend fun getDetailContent(@Query("aid") aid : Long?) : DetailBean
+
 }

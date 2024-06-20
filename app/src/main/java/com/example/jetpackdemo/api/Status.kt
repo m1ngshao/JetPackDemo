@@ -1,4 +1,4 @@
-package com.example.jetpackdemo.ui.main.ui.dashboard
+package com.example.jetpackdemo.api
 
 enum class Status {
     SUCCESS,

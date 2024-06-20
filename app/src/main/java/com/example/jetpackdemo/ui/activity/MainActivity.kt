@@ -7,14 +7,11 @@ import android.view.View.VISIBLE
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.fragment.app.Fragment
 import com.example.jetpackdemo.R
 import com.example.jetpackdemo.databinding.ActivityMainBinding
-import com.example.jetpackdemo.kotlinLearn.show
-import com.example.jetpackdemo.ui.main.ui.dashboard.DashboardFragment
-import com.example.jetpackdemo.ui.main.ui.home.HomeFragment
-import com.example.jetpackdemo.ui.main.ui.notifications.NotificationsFragment
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.example.jetpackdemo.ui.fragment.DashboardFragment
+import com.example.jetpackdemo.ui.fragment.HomeFragment
+import com.example.jetpackdemo.ui.fragment.NotificationsFragment
 
 class MainActivity : AppCompatActivity() {
 

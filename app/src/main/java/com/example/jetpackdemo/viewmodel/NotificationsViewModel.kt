@@ -1,4 +1,4 @@
-package com.example.jetpackdemo.ui.main.ui.notifications
+package com.example.jetpackdemo.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

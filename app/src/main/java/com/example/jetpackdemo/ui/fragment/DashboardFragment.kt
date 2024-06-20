@@ -1,4 +1,4 @@
-package com.example.jetpackdemo.ui.main.ui.dashboard
+package com.example.jetpackdemo.ui.fragment
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,8 +7,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.setFragmentResult
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,9 +14,14 @@ import androidx.recyclerview.widget.RecyclerView.GONE
 import androidx.recyclerview.widget.RecyclerView.VISIBLE
 import com.example.jetpackdemo.Bean.ContentBean
 import com.example.jetpackdemo.R
+import com.example.jetpackdemo.api.ApiHelper
+import com.example.jetpackdemo.api.RetrofitBuilder
+import com.example.jetpackdemo.api.Status
 import com.example.jetpackdemo.databinding.FragmentDashboardBinding
 import com.example.jetpackdemo.ui.main.ListItemDetailFragment
-import com.example.jetpackdemo.ui.main.MyAdapter
+import com.example.jetpackdemo.adapter.DashboardListAdapter
+import com.example.jetpackdemo.viewmodel.DashboardViewModel
+import com.example.jetpackdemo.viewmodel.ViewModelFactory
 
 class DashboardFragment : Fragment() {
 
@@ -28,7 +31,7 @@ class DashboardFragment : Fragment() {
     // onDestroyView.
     private val binding get() = _binding!!
     private lateinit var viewModel : DashboardViewModel
-    private lateinit var madapter : MyAdapter
+    private lateinit var mAdapter : DashboardListAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,13 +39,13 @@ class DashboardFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        viewModel = ViewModelProvider(this,ViewModelFactory(ApiHelper(RetrofitBuilder.apiService,null)))
+        viewModel = ViewModelProvider(this, ViewModelFactory(ApiHelper(RetrofitBuilder.apiService,null)))
             .get(DashboardViewModel::class.java)
 
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
         val root: View = binding.root
-        madapter = MyAdapter(arrayListOf())
-        binding.dashRecyclerView.adapter = madapter
+        mAdapter = DashboardListAdapter(arrayListOf())
+        binding.dashRecyclerView.adapter = mAdapter
         binding.dashRecyclerView.layoutManager = LinearLayoutManager(context)
         viewModel.getPrecious().observe(viewLifecycleOwner, Observer {
             it?.let { resource ->
@@ -61,7 +64,7 @@ class DashboardFragment : Fragment() {
                 }
             }
         })
-        madapter.setListener {
+        mAdapter.setListener {
             val aid = it.aid
             val bundle = bundleOf(
                 Pair("message",aid)
@@ -81,7 +84,7 @@ class DashboardFragment : Fragment() {
     }
 
     private fun retrieveList(contentBeans: List<ContentBean>){
-        madapter.apply {
+        mAdapter.apply {
             addContentBean(contentBeans)
             notifyDataSetChanged()
         }

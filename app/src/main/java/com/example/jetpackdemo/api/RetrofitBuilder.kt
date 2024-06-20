@@ -1,9 +1,7 @@
-package com.example.jetpackdemo.ui.main.ui.dashboard
+package com.example.jetpackdemo.api
 
-import com.example.jetpackdemo.ui.main.ApiService
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
 
 object RetrofitBuilder {
     private const val BASE_URL = "https://api.bilibili.com/"
@@ -15,5 +13,5 @@ object RetrofitBuilder {
             .build()
     }
 
-    val apiService : ApiService = getRetrofit().create(ApiService::class.java)
+    val apiService: ApiService = getRetrofit().create(ApiService::class.java)
 }
