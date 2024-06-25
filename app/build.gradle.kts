@@ -1,9 +1,15 @@
+import com.android.ide.common.gradle.RELEASE
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("jacoco")
 }
+
+
 android {
+
+
     namespace = "com.example.jetpackdemo"
     compileSdk = 34
 
@@ -13,7 +19,7 @@ android {
         targetSdk = 33
         versionCode = 1
         versionName = "1.0"
-
+        multiDexEnabled  = true
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -26,7 +32,46 @@ android {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
+
+        debug {
+            applicationIdSuffix  = ".debug"
+            versionNameSuffix  = "-debug"
+        }
+
+        signingConfigs{
+            create("release"){
+                storeFile = file("release-key.keystore")
+                storePassword  = "123456"
+                keyAlias = "key0"
+                keyPassword  = "123456"
+            }
+        }
+
+        flavorDimensions += "version"
+        productFlavors{
+            create("sit"){
+                dimension = "version"
+                applicationIdSuffix = ".sit"
+                versionNameSuffix = "-sit"
+                resValue("string","application_name","JD SIT")
+            }
+            create("uat"){
+                dimension = "version"
+                applicationIdSuffix = ".uat"
+                versionNameSuffix = "-uat"
+                resValue("string","application_name","JD UAT")
+            }
+            create("prod"){
+                dimension = "version"
+                applicationIdSuffix = ".prod"
+                versionNameSuffix = "-prod"
+                resValue("string","application_name","JD PROD")
+            }
+        }
     }
+
+
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -61,6 +106,7 @@ dependencies {
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1")
     implementation ("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.9.10")
     implementation("io.reactivex.rxjava3:rxjava:3.1.8")
+    implementation("androidx.annotation:annotation:1.8.0")
 
     androidTestImplementation ("androidx.test.espresso:espresso-contrib:3.5.1")
     androidTestImplementation("androidx.test:runner:1.5.2")

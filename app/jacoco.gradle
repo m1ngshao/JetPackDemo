@@ -23,7 +23,7 @@ jacoco{
 
 tasks.register('jacocoTestReport', JacocoReport) {
     group = "JacocoReport"
-    description = Generate Jacoco coverage reports after running test
+    description = "Generate Jacoco coverage reports after running test"
     reports {
         xml.enabled = true
         html.enabled = true
