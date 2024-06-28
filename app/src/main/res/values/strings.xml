@@ -3,8 +3,9 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
+    <string name="channel_name">Channel</string>
+    <string name="channel_description">ChannelDescription</string>
     <string name="title_notifications">Notifications</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="title_gizmos">Gizmos</string>
     <string name="filter_gizmos">FilterGizmos</string>
@@ -18,4 +19,8 @@
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
+    <string name="alert_detail_message">This is detailed message</string>
+    <string name="snooze">snooze</string>
+    <string name="reply_label">Reply Label</string>
+    <string name="show_message">Show Message!</string>
 </resources>

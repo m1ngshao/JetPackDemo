@@ -53,19 +53,19 @@ android {
                 dimension = "version"
                 applicationIdSuffix = ".sit"
                 versionNameSuffix = "-sit"
-                resValue("string","application_name","JD SIT")
+                resValue("string","app_name","1JD SIT")
             }
             create("uat"){
                 dimension = "version"
                 applicationIdSuffix = ".uat"
                 versionNameSuffix = "-uat"
-                resValue("string","application_name","JD UAT")
+                resValue("string","app_name","1JD UAT")
             }
             create("prod"){
                 dimension = "version"
                 applicationIdSuffix = ".prod"
                 versionNameSuffix = "-prod"
-                resValue("string","application_name","JD PROD")
+                resValue("string","app_name","1JD PROD")
             }
         }
     }
@@ -83,6 +83,7 @@ android {
 
 dependencies {
 
+    
     implementation("androidx.core:core-ktx:1.13.1")
     implementation("androidx.appcompat:appcompat:1.7.0")
     implementation("com.google.android.material:material:1.12.0")
@@ -99,13 +100,18 @@ dependencies {
     implementation("com.squareup.okhttp3:okhttp:4.12.0")
     implementation ("com.squareup.retrofit2:retrofit:2.9.0")
     implementation ("com.squareup.retrofit2:converter-gson:2.9.0")
+
+    implementation("io.reactivex.rxjava3:rxjava:3.1.8")
+    implementation ("io.reactivex.rxjava3:rxandroid:3.0.0")
+    implementation ("com.squareup.retrofit2:adapter-rxjava3:2.9.0")
     implementation ("com.squareup.okhttp3:logging-interceptor:3.14.9")
 
     implementation ("org.jetbrains.kotlin:kotlin-reflect:1.8.22")
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.1")
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.8.1")
     implementation ("org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.9.10")
-    implementation("io.reactivex.rxjava3:rxjava:3.1.8")
+
+
     implementation("androidx.annotation:annotation:1.8.0")
 
     androidTestImplementation ("androidx.test.espresso:espresso-contrib:3.5.1")

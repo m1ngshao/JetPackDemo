@@ -4,5 +4,5 @@ import com.google.gson.annotations.SerializedName
 
 class DetailContentBean(
     @SerializedName("desc")
-    var desc : String
+    var desc : String?
 )

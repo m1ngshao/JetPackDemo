@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.jetpackdemo.databinding.FragmentHomeBinding
+import com.example.jetpackdemo.ui.activity.MainActivity
 import com.example.jetpackdemo.viewmodel.HomeViewModel
 
 class HomeFragment : Fragment() {

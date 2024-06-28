@@ -1,5 +1,6 @@
 package com.example.jetpackdemo.ui.fragment
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,11 +9,16 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.example.jetpackdemo.api.ApiService
 import com.example.jetpackdemo.bean.DetailContentBean
 import com.example.jetpackdemo.databinding.FragmentListItemDetailBinding
 import com.example.jetpackdemo.api.Status
 import com.example.jetpackdemo.ui.activity.MainActivity
 import com.example.jetpackdemo.viewmodel.ListItemDetailViewModel
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.disposables.Disposable
+import io.reactivex.rxjava3.schedulers.Schedulers
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -27,7 +33,10 @@ class ListItemDetailFragment : Fragment() {
     private var _binding : FragmentListItemDetailBinding? = null
     private val binding get() = _binding!!
     private lateinit var viewModel : ListItemDetailViewModel
-
+    private val apiService by lazy {
+        ApiService()
+    }
+    private lateinit var mDisposable: Disposable
 
     companion object{
         fun newInstance(): ListItemDetailFragment {
@@ -49,29 +58,30 @@ class ListItemDetailFragment : Fragment() {
         if (clickAid != null) (activity as MainActivity).hideBottomNavigation()
         viewModel = ViewModelProvider(this)
             .get(ListItemDetailViewModel::class.java)
-        viewModel.aid = (clickAid ?: MainActivity.deepLinkAid)!!
+        val aid = (clickAid ?: MainActivity.deepLinkAid)!!
         _binding = FragmentListItemDetailBinding.inflate(inflater, container, false)
         binding.detailToolbarBack.setOnClickListener {
             (activity as MainActivity).supportFragmentManager.popBackStack()
             (activity as MainActivity).showBottomNavigation()
             MainActivity.deepLinkAid = null
         }
-        viewModel.getDetailContent().observe(viewLifecycleOwner, Observer { 
-            it.let {resource -> 
-                when(resource.status){
-                    Status.LOADING ->{
-                        
-                    }
-                    Status.SUCCESS ->{
-                        resource.data.let { detailbean -> binding.detailTv.text = getDetailDesc(detailbean?.data) }
-                    }
-                    Status.ERROR ->{
-                        Toast.makeText(context,resource.message, Toast.LENGTH_SHORT).show()
-                    }
-                }
-                
-            }
-        })
+//        viewModel.getDetailContent().observe(viewLifecycleOwner, Observer {
+//            it.let {resource ->
+//                when(resource.status){
+//                    Status.LOADING ->{
+//
+//                    }
+//                    Status.SUCCESS ->{
+//                        resource.data.let { detailbean -> binding.detailTv.text = getDetailDesc(detailbean?.data) }
+//                    }
+//                    Status.ERROR ->{
+//                        Toast.makeText(context,resource.message, Toast.LENGTH_SHORT).show()
+//                    }
+//                }
+//
+//            }
+//        })
+        getDetailService(aid)
         return binding.root
     }
 
@@ -79,9 +89,18 @@ class ListItemDetailFragment : Fragment() {
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
+        mDisposable.dispose()
     }
 
     private fun getDetailDesc(detailContentBean: DetailContentBean?) : String?{
-        return if(detailContentBean?.desc == "") "此视频没有描述信息" else detailContentBean?.desc
+        return if(detailContentBean?.desc.isNullOrEmpty()) "此视频没有描述信息" else detailContentBean?.desc
+    }
+    private fun getDetailService(aid : Long){
+         mDisposable = apiService.getDetailContent(aid)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe{
+                binding.detailTv.text = getDetailDesc(it.data)
+            }
     }
 }
