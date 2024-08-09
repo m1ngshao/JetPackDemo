@@ -11,6 +11,7 @@ import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.provider.Telephony.Sms.Conversations
+import android.util.Log
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.Toast
@@ -28,6 +29,7 @@ import com.example.jetpackdemo.ui.fragment.HomeFragment
 import com.example.jetpackdemo.ui.fragment.ListItemDetailFragment
 import com.example.jetpackdemo.ui.fragment.NotificationsFragment
 import com.google.android.material.snackbar.Snackbar
+import java.util.Locale
 
 
 const val REQUEST_CODE_POST_NOTIFICATION = 1000
@@ -74,6 +76,9 @@ class MainActivity : AppCompatActivity() {
             hideBottomNavigation()
         }
         showNotification()
+//        val primaryLocale : Locale = this.resources.configuration.locales[0]
+//        val locale = primaryLocale.displayName
+//        Log.d("TAG", "locale: $locale")
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
