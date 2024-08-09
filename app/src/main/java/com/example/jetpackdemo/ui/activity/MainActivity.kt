@@ -99,7 +99,6 @@ class MainActivity : AppCompatActivity() {
         val pendingIntent = PendingIntent.getActivity(this,0,intent,PendingIntent.FLAG_MUTABLE)
 
         val builder = NotificationCompat.Builder(this,"notification1")
-            .setSmallIcon(R.drawable.notification)
             .setContentTitle("My notification")
             .setContentText("Much longer text that cannot fit one line...")
             .setStyle(NotificationCompat.BigTextStyle()
