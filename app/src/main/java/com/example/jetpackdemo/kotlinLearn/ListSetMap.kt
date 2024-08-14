@@ -52,4 +52,7 @@ fun main() {
     for(item:Map.Entry<String,Double> in map2){
         println("key:${item.key},value:${item.value}")
     }
+
+
+
 }
