@@ -20,6 +20,20 @@ fun main() {
     }.observer {
         println("最终消费：$this")
     }
+
+    create1 {
+        "mingshao"
+        123
+        true
+        "AAAAAAAAAA"
+        5452.23
+    }.map {
+        "name"
+    }.map {
+        123.23
+    }.observer1 {
+        println("最终消费：$this")
+    }
 }
 class RxJavaCoreClassObject<T> (var valueItem : T)
 
@@ -35,5 +49,21 @@ inline fun <CREATE_OUTPUT>create(createLambda : () -> CREATE_OUTPUT) : RxJavaCor
 }
 
 inline fun <OBSERVERINPUT>RxJavaCoreClassObject<OBSERVERINPUT>.observer(observerAction : OBSERVERINPUT.() -> Unit){
+    observerAction(valueItem)
+}
+
+class RxJavaCoreClassObject1<T> (var valueItem: T)
+
+inline fun <INPUT,OUTPUT>RxJavaCoreClassObject1<INPUT>.map(action: INPUT.() -> OUTPUT) : RxJavaCoreClassObject1<OUTPUT>{
+    val mapResult = action(valueItem)
+    return RxJavaCoreClassObject1(mapResult)
+}
+
+inline fun <CREATE_OUTPUT>create1(createLambda: () -> CREATE_OUTPUT) : RxJavaCoreClassObject1<CREATE_OUTPUT>{
+    val createResult : CREATE_OUTPUT = createLambda()
+    return RxJavaCoreClassObject1(createResult)
+}
+
+inline fun <OBSERVERINPUT>RxJavaCoreClassObject1<OBSERVERINPUT>.observer1(observerAction: OBSERVERINPUT.() -> Unit){
     observerAction(valueItem)
 }

@@ -12,3 +12,8 @@ class DetailBean(
     @SerializedName("data")
     var data : DetailContentBean
 )
+
+class DetailContentBean(
+    @SerializedName("desc")
+    var desc : String?
+)

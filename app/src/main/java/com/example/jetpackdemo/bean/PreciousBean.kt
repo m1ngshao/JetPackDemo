@@ -12,3 +12,10 @@ data class PreciousBean(
     @SerializedName("data")
     var data : DataBean
 )
+
+data class DataBean (
+    @SerializedName("title")
+    var title : String,
+    @SerializedName("list")
+    var list : List<ContentBean<String>>,
+)
