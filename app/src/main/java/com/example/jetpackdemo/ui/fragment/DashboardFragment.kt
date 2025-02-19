@@ -79,7 +79,7 @@ class DashboardFragment : Fragment() {
         _binding = null
     }
 
-    private fun retrieveList(contentBeans: List<ContentBean>){
+    private fun retrieveList(contentBeans: List<ContentBean<String>>){
         mAdapter.apply {
             addContentBean(contentBeans)
             notifyDataSetChanged()

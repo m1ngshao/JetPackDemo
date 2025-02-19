@@ -11,8 +11,8 @@ import com.example.jetpackdemo.R
 
 
 
-class DashboardListAdapter(private val contentBeanList: ArrayList<ContentBean>) : RecyclerView.Adapter<DashboardListAdapter.MyViewHolder>() {
-    private var listener : ((contentBean: ContentBean) ->Unit?)? = null
+class DashboardListAdapter(private val contentBeanList: ArrayList<ContentBean<String>>) : RecyclerView.Adapter<DashboardListAdapter.MyViewHolder>() {
+    private var listener : ((contentBean: ContentBean<String>) ->Unit?)? = null
 
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val imageView : ImageView = itemView.findViewById(R.id.dash_item_img)
@@ -20,7 +20,7 @@ class DashboardListAdapter(private val contentBeanList: ArrayList<ContentBean>) 
         val owner : TextView = itemView.findViewById(R.id.dash_item_owner)
     }
 
-    fun addContentBean(contentBeanList: List<ContentBean>){
+    fun addContentBean(contentBeanList: List<ContentBean<String>>){
         this.contentBeanList.apply {
             clear()
             addAll(contentBeanList)
@@ -54,7 +54,7 @@ class DashboardListAdapter(private val contentBeanList: ArrayList<ContentBean>) 
 
     }
 
-    fun setListener(listener : ((contentBean: ContentBean) ->Unit)){
+    fun setListener(listener : ((contentBean: ContentBean<String>) ->Unit)){
         this.listener = listener
     }
 }
